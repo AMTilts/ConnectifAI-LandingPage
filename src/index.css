@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* For Webkit browsers like Chrome, Safari */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-transparent; /* Or set a specific track color */
+    border-radius: 10px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-white/20; /* Your desired thumb color */
+    border-radius: 10px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/30; /* Optional: Hover state color */
+  }
+
+  /* For Firefox */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.white / 0.2') transparent; /* thumb color and track color */
+  }
+}
+
+
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -12,6 +38,15 @@
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(2deg); }
 }
+
+/* Ensure pulse animation is defined if not default */
+@keyframes pulse {
+  50% { opacity: .5; }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 
 .animate-gradient {
   background-size: 400% 400%;
